@@ -1,0 +1,33 @@
+Note: This program is written in Octave. I am including the instructions to install on ubuntu in this README.
+Installation instructions: In the terminal, type in the following commands: 
+	sudo add-apt-repository ppa:picaso/octave
+	sudo apt-get update
+	sudo apt-get install octave
+
+VL-FEAT's implementation of SIFT was used.
+To get vl-feat's sift to work, the following are the instructions:
+1. Install the image toolbox on Octave. Download the image tool box from: http://octave.sourceforge.net/image/
+2. Go to the directory where you kept the downloaded image toolbox from your octave command line interface. type: pkg install "image-toolbox-zip-file-name-should-go-here".
+3. Then, follow the instructions on : http://www.vlfeat.org/install-octave.html
+4. each time you are using the vl-feat's toolbox, you have to run the addpath('path-to-the-vlfeat-toolbox').
+
+That was the background information. Now, for the implementation details...
+
+The function SfM2.m should be passed three parameters - path for the first image, path for the second image and path for the intrinsic.new.
+Example would be:
+
+im1_path = '/home/kalyan/Desktop/assignment4/images_folder/fountain/1.jpg';
+im2_path = '/home/kalyan/Desktop/assignment4/images_folder/fountain/2.jpg';
+dir_path = '/home/kalyan/Desktop/assignment4/images_folder/fountain/intrinsic.new';
+
+SfM2(im1_path, im2_path, dir_path);
+
+The corresponding points are computed for the SIFT features.
+Then, using DLT, the fundamental matrix is computed.
+Then, the essential matrix is got.
+The four possible R and T's are computed.
+I didn't find which one of them is the right orientation.
+The program will then write four ".ply" files in the directory corresponding to the 4 configurations of the second camera projection matrix.
+This can be viewed on Meshlab for the output.
+
+Also, I am uploading a sample script file "script_sfm2.m" which will have the format for running the function.
